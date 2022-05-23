@@ -37,6 +37,37 @@ const Items = [
   },
 ];
 
+const conditions = [
+  {
+    size: 'small',
+    color: 'success',
+    variant: 'contained',
+    conditionName: '良品',
+  },
+  {
+    size: 'small',
+    color: 'secondary',
+    variant: 'contained',
+    conditionName: '二手',
+  },
+  {
+    size: 'small',
+    color: 'error',
+    variant: 'contained',
+    conditionName: '不良',
+  },
+  {
+    size: 'small',
+    variant: 'contained',
+    conditionName: '缺貨',
+  },
+  {
+    size: 'small',
+    variant: 'outlined',
+    conditionName: '發霉',
+  },
+];
+
 const App = () => {
   return (
     <React.Fragment>
@@ -142,21 +173,11 @@ const App = () => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" variant="contained" color="success">
-                  良品
-                </Button>
-                <Button size="small" variant="contained" color="secondary">
-                  二手
-                </Button>
-                <Button size="small" variant="contained" color="error">
-                  不良
-                </Button>
-                <Button size="small" variant="contained">
-                  發霉
-                </Button>
-                <Button size="small" variant="outlined">
-                  缺貨
-                </Button>
+                {conditions.map(({ conditionName, ...props }, index) => (
+                  <Button key={index} {...props}>
+                    {conditionName}
+                  </Button>
+                ))}
               </CardActions>
             </Card>
           </Grid>
