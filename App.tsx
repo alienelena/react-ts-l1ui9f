@@ -18,6 +18,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { purple } from '@mui/material/colors';
+import React, { useState } from "react";
 
 const Items = [
   {
@@ -69,6 +70,16 @@ const conditions = [
 ];
 
 const App = () => {
+
+  const [clickedButton, setClickedButton] = useState('');
+
+  const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const button: HTMLButtonElement = event.currentTarget;
+    setClickedButton(button.name);
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -151,6 +162,15 @@ const App = () => {
           </div>
         </Box>
       </main>
+
+      <Grid Container>
+       <Typography size="small" color="textPrimary" align="center" spacing={2}>
+        {clickedButton !== ""
+          ? `You have clicked "${clickedButton}"` 
+          : "No button clicked yet"}
+        </Typography>
+      </Grid>
+
       <Grid
         direction="row"
         container
@@ -174,7 +194,7 @@ const App = () => {
               </CardContent>
               <CardActions>
                 {conditions.map(({ conditionName, ...props }, index) => (
-                  <Button key={index} {...props}>
+                  <Button key={index} {...props} onClick={buttonHandler} className="button" name={name+conditionName}>
                     {conditionName}
                   </Button>
                 ))}
